@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Herosection = () => {
   return (
-    <section className="realtive min-h-[600px] w-full overflow-hidden bg-linear-to-br from bg-purple-600  via-indigo-950 to-indigo-950 ">
+    <section className="realtive  min-h-[600px] w-full overflow-hidden bg-linear-to-br from bg-purple-600  via-indigo-950 to-indigo-950 ">
       {/* gradient overlay */}
 
       <div className="absolute inset-0 before:absolute before:left-1/4 before:top-0 before:h-[500px] before:w-[500px] before:rounded-full before:bg-linear-to-r before:from-violet-600/20 before:to-indigo-600/20 before:blur-3xl"></div>
