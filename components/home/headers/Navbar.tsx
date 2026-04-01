@@ -7,19 +7,23 @@ import { ToggleMode } from "./ToggleMode";
 import { useState } from "react";
 import { Menu, Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import {
+  Show,
+  SignIn,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuopen] = useState(false);
   return (
-    <div className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-
-
           {/* Left Section - Logo & Desktop Navigation */}
           <div className="flex items-center  gap-8">
-
-
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
               <span className="text-2xl font-bold">
@@ -29,34 +33,34 @@ const Navbar = () => {
                 <span className="text-foreground">Code</span>
               </span>
             </Link>
-              </div>
+          </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-4">
-              <Link
-                href="/articles"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Articles
-              </Link>
-              <Link
-                href="/tutorials"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Tutorials
-              </Link>
-              <Link
-                href="/about"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                About
-              </Link>
-              <Link
-                href="/dashboard"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Dashboard
-              </Link>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-4">
+            <Link
+              href="/articles"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Articles
+            </Link>
+            <Link
+              href="/tutorials"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Tutorials
+            </Link>
+            <Link
+              href="/about"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              About
+            </Link>
+            <Link
+              href="/dashboard"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Dashboard
+            </Link>
           </div>
 
           {/* Right Section - Search & Actions */}
@@ -68,19 +72,25 @@ const Navbar = () => {
             <ToggleMode />
 
             {/* User Actions */}
-            {/* <SignedIn> */}
-            {/* <UserButton afterSignOutUrl="/" /> */}
-            {/* </SignedIn> */}
-            {/* <SignedOut> */}
-            <div className="hidden md:flex items-center gap-2">
-              {/* <SignInButton> */}
-              <Button variant="outline">Login</Button>
-              {/* </SignInButton> */}
-              {/* <SignUpButton> */}
-              <Button>Sign up</Button>
-              {/* </SignUpButton> */}
-            </div>
-            {/* </SignedOut> */}
+
+            <Show when="signed-in">
+              <UserButton />
+            </Show>
+
+
+            <Show when="signed-out">
+                <div className="hidden md:flex items-center gap-2">
+              <SignInButton >
+                  <Button variant="outline">Login</Button>
+              </SignInButton>
+
+              <SignUpButton>
+                  <Button>Sign up</Button>
+              </SignUpButton>
+                </div>
+            </Show>
+
+            
 
             {/* Mobile Menu Button */}
             <Button
