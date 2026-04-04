@@ -14,9 +14,11 @@ import {
   SignOutButton,
   SignUpButton,
   UserButton,
+  useUser,
 } from "@clerk/nextjs";
 
 const Navbar = () => {
+
   const [isMobileMenuOpen, setIsMobileMenuopen] = useState(false);
   return (
     <div className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
@@ -73,12 +75,15 @@ const Navbar = () => {
 
             {/* User Actions */}
 
+            
+
             <Show when="signed-in">
               <UserButton />
             </Show>
 
 
             <Show when="signed-out">
+              
                 <div className="hidden md:flex items-center gap-2">
               <SignInButton >
                   <Button variant="outline">Login</Button>
