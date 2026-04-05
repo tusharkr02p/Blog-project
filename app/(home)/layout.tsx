@@ -3,7 +3,13 @@ import { currentUser } from '@clerk/nextjs/server'
 import React from 'react'
 
 const layout = async({children}: {children: React.ReactNode}) => {
- const user = await currentUser(); // ✅ MUST
+ let user = null;
+
+  try {
+    user = await currentUser();
+  } catch (err) {
+    console.log("Clerk error:", err);
+  }
 
   if (user) {
     const loggedInUser = await prisma.user.findUnique({
